@@ -83,7 +83,7 @@ function displayAnimals(animalList = animals) {
 
   animalList.forEach((animal) => {
     const card = document.createElement("div");
-    card.className = "p-4 border rounded shadow mb-4";
+    card.className = "card p-4 border rounded shadow mb-4";
 
     card.innerHTML = `
       <h2 class="text-xl font-bold">${animal.name}</h2>
@@ -126,24 +126,27 @@ animalForm.addEventListener("submit", function (e) {
   let categoryInput = document.getElementById("categoryInput");
   let imageInput = document.getElementById("imageInput");
 
-  if (!validCategories.includes(categoryInput.value)) {
-    alert(
-      `Catégorie inconnue : "${
-        categoryInput.value
-      }". Veuillez choisir parmi : ${validCategories.join(", ")}`
-    );
-    return;
-  }
+  const errorsDiv = document.getElementById("errors");
 
-  let newAnimal = new Animal(
-    nameInput.value,
-    descriptionInput.value,
-    categoryInput.value,
-    imageInput.value
-  );
-  // On ajoute le nouvel animal au tableau d'animaux et on rappelle la fonction pour afficher le tableau update
-  animals.push(newAnimal);
-  displayAnimals(animals);
-  // On reset le form pour vider les champs
-  animalForm.reset();
+  if (!validCategories.includes(categoryInput.value)) {
+    errorsDiv.textContent = `Catégorie inconnue : "${
+      categoryInput.value
+    }". VOUS DEVEZ CHOISIR PARMI CES 3 SEULEMENT : ${validCategories.join(
+      ", "
+    )}`;
+    return;
+  } else {
+    errorsDiv.textContent = "";
+
+    let newAnimal = new Animal(
+      nameInput.value,
+      descriptionInput.value,
+      categoryInput.value,
+      imageInput.value
+    );
+
+    animals.push(newAnimal);
+    displayAnimals(animals);
+    animalForm.reset();
+  } // 👈🏽 cette accolade manquait
 });
