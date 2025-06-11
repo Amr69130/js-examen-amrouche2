@@ -1,34 +1,82 @@
 import "./style.css";
 
-//je crée un tableau d'objets animaux
+// On declare une class Animal
+class Animal {
+  constructor(name, description, category, image) {
+    this.name = name;
+    this.description = description;
+    this.category = category;
+    this.image = image;
+  }
+}
+
+// On crée un tableau d'instances de la class Animal
 let animals = [
-  {
-    name: "Girafe",
-    description: "La girafe est un mammifère ruminant africain",
-    category: "terrestre",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg",
-  },
-  {
-    name: "Méduse",
-    description: "La méduse est un animal marin gélatineux",
-    category: "marin",
-    image:
-      "https://images.pexels.com/photos/1076758/pexels-photo-1076758.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
-    name: "Aigle",
-    description: "L'aigle est un rapace diurne",
-    category: "volant",
-    image:
-      "https://images.unsplash.com/photo-1557401620-67270b61ea82?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWlnbGUlMjB2b2xhbnR8ZW58MHx8MHx8fDA%3D",
-  },
+  new Animal(
+    "Girafe",
+    "La girafe est un mammifère ruminant africain",
+    "terrestre",
+    "https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg"
+  ),
+  new Animal(
+    "Méduse",
+    "La méduse est un animal marin gélatineux",
+    "marin",
+    "https://images.pexels.com/photos/1076758/pexels-photo-1076758.jpeg?auto=compress&cs=tinysrgb&w=600"
+  ),
+  new Animal(
+    "Aigle",
+    "L'aigle est un rapace diurne",
+    "volant",
+    "https://images.unsplash.com/photo-1557401620-67270b61ea82?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWlnbGUlMjB2b2xhbnR8ZW58MHx8MHx8fDA%3D"
+  ),
+
+  new Animal(
+    "Éléphant",
+    "L'éléphant est le plus grand mammifère terrestre vivant.",
+    "terrestre",
+    "https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg"
+  ),
+
+  new Animal(
+    "Dauphin",
+    "Le dauphin est un mammifère marin très intelligent.",
+    "marin",
+    "https://media.istockphoto.com/id/182481157/fr/photo/dauphins-bondissants.jpg?s=2048x2048&w=is&k=20&c=3DDOiSECcOCNcWIcyjdbvUl0jDeWB2ZsEBnokwzpaRg="
+  ),
+
+  new Animal(
+    "Perroquet",
+    "Le perroquet est un oiseau coloré connu pour imiter les sons.",
+    "volant",
+    "https://media.istockphoto.com/id/1873605186/fr/photo/un-ara-%C3%A9carlate.jpg?s=2048x2048&w=is&k=20&c=s2rCl49-XxbrSbUY5dRJoGLH7vYAmSuBfy2yj7O2UiY="
+  ),
+  new Animal(
+    "Tigre",
+    "Le tigre est un félin carnivore au pelage rayé.",
+    "terrestre",
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg"
+  ),
+
+  new Animal(
+    "Requin",
+    "Le requin est un prédateur marin aux multiples espèces.",
+    "marin",
+    "https://media.istockphoto.com/id/533130811/fr/photo/grand-requin-blanc-sourire.jpg?s=2048x2048&w=is&k=20&c=6xGkK6fwyDnB3ywvml3Fr9ym_DgoPREsuqDya4-VOXk="
+  ),
+
+  new Animal(
+    "Chauve-souris",
+    "La chauve-souris est un mammifère volant nocturne.",
+    "volant",
+    "https://media.istockphoto.com/id/1365008587/fr/photo/renard-volant-%C3%A0-t%C3%AAte-grise-daustralie.jpg?s=2048x2048&w=is&k=20&c=TLX2KtHGs54GSfuDcCrmhSxvXYvQRStl6nQ3osB4K5o="
+  ),
 ];
 
-// Affichage du tableau dans la console
+// On log le tableau en console
 console.log(animals);
 
-// Fonction pour afficher les animaux dans le DOM
+// On crée une fonction pour afficher les animaux dans le DOM
 function displayAnimals(animalList = animals) {
   const container = document.querySelector("#animals");
   container.innerHTML = "";
@@ -37,7 +85,6 @@ function displayAnimals(animalList = animals) {
     const card = document.createElement("div");
     card.className = "p-4 border rounded shadow mb-4";
 
-    //on reprend la strcture exemple de l'html et on lui insere les vraies valeurs à l'aide de ${} en entourant de backticks
     card.innerHTML = `
       <h2 class="text-xl font-bold">${animal.name}</h2>
       <p class="italic">${animal.category}</p>
@@ -49,36 +96,26 @@ function displayAnimals(animalList = animals) {
   });
 }
 
-// Appel initial
+// On appelle la function pour afficher tous les animaux en 1er lieu
 displayAnimals();
 
-// Ajout de l'écouteur pour filtrer les animaux par catégorie
+// On ajoute un filtre par catégories
 let animalFilter = document.getElementById("animalFilter");
 
-animalFilter.addEventListener("change", function (e) {
+animalFilter.addEventListener("change", function () {
   const selectedCategory = animalFilter.value;
 
-  let filteredAnimals = [];
+  let filteredAnimals =
+    selectedCategory === ""
+      ? animals
+      : animals.filter((animal) => animal.category === selectedCategory);
 
-  if (selectedCategory === "") {
-    // Si aucune catégorie n'est sélectionnée, afficher tous les animaux
-    filteredAnimals = animals;
-  }
-  // Sinon, filtrer les animaux par la catégorie sélectionnée (à l'ecoute du change)
-  else {
-    filteredAnimals = animals.filter(
-      (animal) => animal.category === selectedCategory
-    );
-  }
-
+  //on rappelle la function mais avec les animaux filtrés
   displayAnimals(filteredAnimals);
 });
 
-// Event listener SUBMIT sur le form
+// On crée la possibilité d'ajouter un nouvel animal via un formulaire avec verification de la catégorie et validation
 const animalForm = document.getElementById("animal_add_form");
-//console.log(carForm);
-
-//on  definit mes category valides
 const validCategories = ["terrestre", "marin", "volant"];
 
 animalForm.addEventListener("submit", function (e) {
@@ -89,27 +126,24 @@ animalForm.addEventListener("submit", function (e) {
   let categoryInput = document.getElementById("categoryInput");
   let imageInput = document.getElementById("imageInput");
 
-  // ON vérifie si la catégorie est valide
   if (!validCategories.includes(categoryInput.value)) {
     alert(
       `Catégorie inconnue : "${
         categoryInput.value
       }". Veuillez choisir parmi : ${validCategories.join(", ")}`
     );
-    return; // on empêche l'ajout si catégorie invalide
+    return;
   }
 
-  let newAnimal = {
-    name: nameInput.value,
-    description: descriptionInput.value,
-    category: categoryInput.value,
-    image: imageInput.value,
-  };
-
-  // on ajoute l'animal au tableau
+  let newAnimal = new Animal(
+    nameInput.value,
+    descriptionInput.value,
+    categoryInput.value,
+    imageInput.value
+  );
+  // On ajoute le nouvel animal au tableau d'animaux et on rappelle la fonction pour afficher le tableau update
   animals.push(newAnimal);
-  // on Affich du tableau update
   displayAnimals(animals);
-  //On remet à 0 le formulaire
+  // On reset le form pour vider les champs
   animalForm.reset();
 });
