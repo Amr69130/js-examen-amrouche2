@@ -26,22 +26,30 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  background-color: #242424;
+  background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode: screen; /* lumière douce */
+  filter: brightness(0.9) contrast(0.8);
+
+  /* Pas de flex ici pour que le fond couvre tout */
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh; /* Pour centrer verticalement */
 }
 
 .logo {

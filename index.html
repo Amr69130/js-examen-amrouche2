@@ -13,7 +13,7 @@
     <h2 class="text-2xl font-semibold mb-2 text-center">FILTRES</h2>
     <select
       id="animalFilter"
-      class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+      class="w-full p-2 border border-gray-300 rounded bg-white bg-opacity-90 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
     >
       <option value="">-- Toutes les categories --</option>
       <option value="terrestre">Terrestre</option>
@@ -27,10 +27,12 @@
     id="animals"
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
   >
-    <!-- Exemples d’animaux ici -->
+    <!-- Les animaux seront insérés ici via JS -->
   </div>
 
   <!-- FORMULAIRE D’AJOUT -->
+  <h2 class="text-2xl font-semibold mb-4">Ajouter un nouvel animal</h2>
+
   <form
     id="animal_add_form"
     class="p-6 border border-gray-300 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700 max-w-md"
